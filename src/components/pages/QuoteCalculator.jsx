@@ -164,14 +164,13 @@ const QuoteCalculator = () => {
               Coverage Details
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input
                 label="Coverage Amount"
                 name="coverageAmount"
                 type="number"
                 value={formData.coverageAmount}
                 onChange={handleInputChange}
-                placeholder="100000"
                 required
               />
               
@@ -181,7 +180,6 @@ const QuoteCalculator = () => {
                 type="number"
                 value={formData.deductible}
                 onChange={handleInputChange}
-                placeholder="500"
                 required
               />
               
@@ -191,7 +189,6 @@ const QuoteCalculator = () => {
                 type="number"
                 value={formData.age}
                 onChange={handleInputChange}
-                placeholder="30"
               />
               
               <Input
@@ -199,13 +196,12 @@ const QuoteCalculator = () => {
                 name="location"
                 value={formData.location}
                 onChange={handleInputChange}
-                placeholder="New York, NY"
                 required
               />
             </div>
 
             {/* Product-specific fields */}
-            {formData.productType === 'auto' && (
+{formData.productType === 'auto' && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Input
                   label="Vehicle Year"
@@ -213,7 +209,6 @@ const QuoteCalculator = () => {
                   type="number"
                   value={formData.vehicleYear}
                   onChange={handleInputChange}
-                  placeholder="2022"
                 />
                 
                 <Input
@@ -221,7 +216,6 @@ const QuoteCalculator = () => {
                   name="vehicleMake"
                   value={formData.vehicleMake}
                   onChange={handleInputChange}
-                  placeholder="Toyota"
                 />
                 
                 <Input
@@ -229,19 +223,17 @@ const QuoteCalculator = () => {
                   name="vehicleModel"
                   value={formData.vehicleModel}
                   onChange={handleInputChange}
-                  placeholder="Camry"
                 />
               </div>
             )}
 
-            {formData.productType === 'travel' && (
+{formData.productType === 'travel' && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Input
                   label="Destination"
                   name="tripDestination"
                   value={formData.tripDestination}
                   onChange={handleInputChange}
-                  placeholder="Europe"
                 />
                 
                 <Input
@@ -250,7 +242,6 @@ const QuoteCalculator = () => {
                   type="number"
                   value={formData.tripDuration}
                   onChange={handleInputChange}
-                  placeholder="14"
                 />
                 
                 <Input
@@ -259,12 +250,11 @@ const QuoteCalculator = () => {
                   type="number"
                   value={formData.travelers}
                   onChange={handleInputChange}
-                  placeholder="2"
                 />
               </div>
             )}
 
-            {formData.productType === 'home' && (
+{formData.productType === 'home' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
                   label="Property Value"
@@ -272,9 +262,7 @@ const QuoteCalculator = () => {
                   type="number"
                   value={formData.propertyValue}
                   onChange={handleInputChange}
-                  placeholder="300000"
                 />
-                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Property Type
