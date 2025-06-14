@@ -47,6 +47,7 @@ function AppContent() {
       clientId: import.meta.env.VITE_APPER_PROJECT_ID,
       view: 'both',
       onSuccess: function (user) {
+        debugger;
         setIsInitialized(true);
         // CRITICAL: This exact currentPath logic must be preserved in all implementations
         // DO NOT simplify or modify this pattern as it ensures proper redirection flow
