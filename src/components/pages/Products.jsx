@@ -148,180 +148,183 @@ const handleGetQuote = (product) => {
   const handleClearComparison = () => {
     setSelectedProducts([]);
   };
-  return (
-    <div className="container mx-auto px-4 lg:px-8 py-8">
-      {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4 font-display">
-          Insurance Products
-        </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Explore our comprehensive range of insurance products designed to protect what matters most to you
-        </p>
-      </div>
+return (
+    <>
+      <div className="container mx-auto px-4 lg:px-8 py-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4 font-display">
+            Insurance Products
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Explore our comprehensive range of insurance products designed to protect what matters most to you
+          </p>
+        </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
-        {filterOptions.map((option) => (
-          <motion.button
-            key={option.id}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setSelectedType(option.id)}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-              selectedType === option.id
-                ? 'bg-primary text-white shadow-md'
-                : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
-            }`}
-          >
-            <ApperIcon name={option.icon} className="w-4 h-4" />
-            <span>{option.label}</span>
-          </motion.button>
-        ))}
-      </div>
-
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredProducts.map((product, index) => (
-          <motion.div
-            key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-<Card className="p-6 h-full flex flex-col relative">
-              {product.popular && (
-                <div className="absolute -top-3 left-6 bg-gradient-to-r from-primary to-secondary text-white px-3 py-1 rounded-full text-xs font-medium">
-                  Most Popular
-                </div>
-              )}
-              
-              {/* Comparison Checkbox */}
-              <div className="absolute top-4 right-4">
-                <label className="flex items-center space-x-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={selectedProducts.some(p => p.id === product.id)}
-                    onChange={() => handleProductSelection(product)}
-                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
-                  />
-                  <span className="text-xs text-gray-600">Compare</span>
-                </label>
-              </div>
-              <div className="flex-1">
-                <div className={`w-12 h-12 ${product.color} rounded-lg flex items-center justify-center mb-4`}>
-                  <ApperIcon name={product.icon} className="w-6 h-6 text-white" />
-                </div>
-                
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {product.title}
-                </h3>
-                
-                <p className="text-gray-600 text-sm mb-4">
-                  {product.description}
-                </p>
-                
-                <div className="mb-4">
-                  <div className="flex items-baseline">
-                    <span className="text-2xl font-bold text-primary">
-                      {formatCurrency(product.price)}
-                    </span>
-                    <span className="text-gray-500 text-sm ml-2">/year</span>
-                  </div>
-                </div>
-                
-                <ul className="space-y-2 mb-6">
-                  {product.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start text-sm text-gray-600">
-                      <ApperIcon name="Check" className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="space-y-3">
-                <Button
-                  onClick={() => handleGetQuote(product)}
-                  className="w-full"
-                  variant={product.popular ? 'primary' : 'outline'}
-                >
-                  Get Quote
-                </Button>
-<Button
-                  variant="text"
-                  className="w-full text-sm"
-                  onClick={() => {
-                    // Handle learn more
-                  }}
-                >
-                  Learn More
-                </Button>
-              </div>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Comparison Controls */}
-      {selectedProducts.length > 0 && (
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-gray-50 rounded-lg">
-          <div className="flex items-center space-x-4">
-            <span className="text-sm font-medium text-gray-700">
-              {selectedProducts.length} product{selectedProducts.length > 1 ? 's' : ''} selected
-            </span>
-            <Button
-              variant="text"
-              size="sm"
-              onClick={handleClearComparison}
-              className="text-gray-500 hover:text-gray-700"
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {filterOptions.map((option) => (
+            <motion.button
+              key={option.id}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedType(option.id)}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                selectedType === option.id
+                  ? 'bg-primary text-white shadow-md'
+                  : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
+              }`}
             >
-              Clear Selection
+              <ApperIcon name={option.icon} className="w-4 h-4" />
+              <span>{option.label}</span>
+            </motion.button>
+          ))}
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredProducts.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Card className="p-6 h-full flex flex-col relative">
+                {product.popular && (
+                  <div className="absolute -top-3 left-6 bg-gradient-to-r from-primary to-secondary text-white px-3 py-1 rounded-full text-xs font-medium">
+                    Most Popular
+                  </div>
+                )}
+                
+                {/* Comparison Checkbox */}
+                <div className="absolute top-4 right-4">
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedProducts.some(p => p.id === product.id)}
+                      onChange={() => handleProductSelection(product)}
+                      className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
+                    />
+                    <span className="text-xs text-gray-600">Compare</span>
+                  </label>
+                </div>
+                <div className="flex-1">
+                  <div className={`w-12 h-12 ${product.color} rounded-lg flex items-center justify-center mb-4`}>
+                    <ApperIcon name={product.icon} className="w-6 h-6 text-white" />
+                  </div>
+                  
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {product.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm mb-4">
+                    {product.description}
+                  </p>
+                  
+                  <div className="mb-4">
+                    <div className="flex items-baseline">
+                      <span className="text-2xl font-bold text-primary">
+                        {formatCurrency(product.price)}
+                      </span>
+                      <span className="text-gray-500 text-sm ml-2">/year</span>
+                    </div>
+                  </div>
+                  
+                  <ul className="space-y-2 mb-6">
+                    {product.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start text-sm text-gray-600">
+                        <ApperIcon name="Check" className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="space-y-3">
+                  <Button
+                    onClick={() => handleGetQuote(product)}
+                    className="w-full"
+                    variant={product.popular ? 'primary' : 'outline'}
+                  >
+                    Get Quote
+                  </Button>
+                  <Button
+                    variant="text"
+                    className="w-full text-sm"
+                    onClick={() => {
+                      // Handle learn more
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Comparison Controls */}
+        {selectedProducts.length > 0 && (
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-gray-50 rounded-lg">
+            <div className="flex items-center space-x-4">
+              <span className="text-sm font-medium text-gray-700">
+                {selectedProducts.length} product{selectedProducts.length > 1 ? 's' : ''} selected
+              </span>
+              <Button
+                variant="text"
+                size="sm"
+                onClick={handleClearComparison}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                Clear Selection
+              </Button>
+            </div>
+            <Button
+              onClick={handleCompare}
+              disabled={selectedProducts.length < 2}
+              className="min-w-[120px]"
+            >
+              Compare Plans
             </Button>
           </div>
-          <Button
-            onClick={handleCompare}
-            disabled={selectedProducts.length < 2}
-            className="min-w-[120px]"
-          >
-            Compare Plans
-          </Button>
-        </div>
-      )}
+        )}
 
-      {/* No Results */}
-      {filteredProducts.length === 0 && (
-        <div className="text-center py-12">
-          <ApperIcon name="Search" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            No products found
-          </h3>
-          <p className="text-gray-500">
-            Try adjusting your filter to see more products
-          </p>
-        </div>
-      )}
-      {/* CTA Section */}
-      <section className="mt-16 text-center">
-        <Card className="p-8 bg-gradient-to-r from-primary/5 to-secondary/5">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 font-display">
-            Need Help Choosing?
-          </h2>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Our insurance experts are here to help you find the perfect coverage for your needs. Get personalized recommendations based on your situation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">
-              <ApperIcon name="MessageCircle" className="w-5 h-5 mr-2" />
-              Chat with Expert
-            </Button>
-            <Button variant="outline" size="lg">
-              <ApperIcon name="Phone" className="w-5 h-5 mr-2" />
-              Call Us
-            </Button>
-</div>
-        </Card>
-      </section>
+        {/* No Results */}
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-12">
+            <ApperIcon name="Search" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              No products found
+            </h3>
+            <p className="text-gray-500">
+              Try adjusting your filter to see more products
+            </p>
+          </div>
+        )}
+        {/* CTA Section */}
+        <section className="mt-16 text-center">
+          <Card className="p-8 bg-gradient-to-r from-primary/5 to-secondary/5">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 font-display">
+              Need Help Choosing?
+            </h2>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Our insurance experts are here to help you find the perfect coverage for your needs. Get personalized recommendations based on your situation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg">
+                <ApperIcon name="MessageCircle" className="w-5 h-5 mr-2" />
+                Chat with Expert
+              </Button>
+              <Button variant="outline" size="lg">
+                <ApperIcon name="Phone" className="w-5 h-5 mr-2" />
+                Call Us
+              </Button>
+            </div>
+          </Card>
+        </section>
+      </div>
+
       {/* Comparison Modal */}
       {showComparisonModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -437,7 +440,7 @@ const handleGetQuote = (product) => {
           </motion.div>
         </div>
       )}
-    </div>
-};
+    </>
+  );
 
 export default Products;
