@@ -11,6 +11,8 @@ const Products = () => {
   const [searchParams] = useSearchParams();
   const [selectedType, setSelectedType] = useState(searchParams.get('type') || 'all');
   const [loading, setLoading] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [showComparisonModal, setShowComparisonModal] = useState(false);
   const navigate = useNavigate();
 
   const insuranceProducts = [
@@ -124,10 +126,28 @@ const Products = () => {
     }).format(amount);
   };
 
-  const handleGetQuote = (product) => {
+const handleGetQuote = (product) => {
     navigate(`/quote?type=${product.type}&product=${product.id}`);
   };
 
+  const handleProductSelection = (product) => {
+    setSelectedProducts(prev => {
+      const isSelected = prev.some(p => p.id === product.id);
+      if (isSelected) {
+        return prev.filter(p => p.id !== product.id);
+      } else {
+        return [...prev, product];
+      }
+    });
+  };
+
+  const handleCompare = () => {
+    setShowComparisonModal(true);
+  };
+
+  const handleClearComparison = () => {
+    setSelectedProducts([]);
+  };
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       {/* Header */}
@@ -169,13 +189,25 @@ const Products = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <Card className="p-6 h-full flex flex-col relative">
+<Card className="p-6 h-full flex flex-col relative">
               {product.popular && (
                 <div className="absolute -top-3 left-6 bg-gradient-to-r from-primary to-secondary text-white px-3 py-1 rounded-full text-xs font-medium">
                   Most Popular
                 </div>
               )}
               
+              {/* Comparison Checkbox */}
+              <div className="absolute top-4 right-4">
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedProducts.some(p => p.id === product.id)}
+                    onChange={() => handleProductSelection(product)}
+                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
+                  />
+                  <span className="text-xs text-gray-600">Compare</span>
+                </label>
+              </div>
               <div className="flex-1">
                 <div className={`w-12 h-12 ${product.color} rounded-lg flex items-center justify-center mb-4`}>
                   <ApperIcon name={product.icon} className="w-6 h-6 text-white" />
@@ -216,10 +248,12 @@ const Products = () => {
                 >
                   Get Quote
                 </Button>
-                <Button
+<Button
                   variant="text"
                   className="w-full text-sm"
-                  onClick={() => {/* Handle learn more */}}
+                  onClick={() => {
+                    // Handle learn more
+                  }}
                 >
                   Learn More
                 </Button>
@@ -228,6 +262,32 @@ const Products = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* Comparison Controls */}
+      {selectedProducts.length > 0 && (
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-gray-50 rounded-lg">
+          <div className="flex items-center space-x-4">
+            <span className="text-sm font-medium text-gray-700">
+              {selectedProducts.length} product{selectedProducts.length > 1 ? 's' : ''} selected
+            </span>
+            <Button
+              variant="text"
+              size="sm"
+              onClick={handleClearComparison}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              Clear Selection
+            </Button>
+          </div>
+          <Button
+            onClick={handleCompare}
+            disabled={selectedProducts.length < 2}
+            className="min-w-[120px]"
+          >
+            Compare Plans
+          </Button>
+        </div>
+      )}
 
       {/* No Results */}
       {filteredProducts.length === 0 && (
@@ -241,7 +301,6 @@ const Products = () => {
           </p>
         </div>
       )}
-
       {/* CTA Section */}
       <section className="mt-16 text-center">
         <Card className="p-8 bg-gradient-to-r from-primary/5 to-secondary/5">
@@ -260,11 +319,125 @@ const Products = () => {
               <ApperIcon name="Phone" className="w-5 h-5 mr-2" />
               Call Us
             </Button>
-          </div>
+</div>
         </Card>
       </section>
+      {/* Comparison Modal */}
+      {showComparisonModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
+          >
+            <div className="flex items-center justify-between p-6 border-b">
+              <h2 className="text-2xl font-bold text-gray-900">Compare Plans</h2>
+              <button
+                onClick={() => setShowComparisonModal(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <ApperIcon name="X" className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-auto max-h-[calc(90vh-80px)]">
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-4 font-semibold text-gray-900">Feature</th>
+                      {selectedProducts.map((product) => (
+                        <th key={product.id} className="text-center p-4 min-w-[200px]">
+                          <div className="flex flex-col items-center">
+                            <div className={`w-12 h-12 ${product.color} rounded-lg flex items-center justify-center mb-2`}>
+                              <ApperIcon name={product.icon} className="w-6 h-6 text-white" />
+                            </div>
+                            <h3 className="font-semibold text-gray-900">{product.title}</h3>
+                          </div>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b bg-gray-50">
+                      <td className="p-4 font-medium text-gray-900">Annual Price</td>
+                      {selectedProducts.map((product) => (
+                        <td key={product.id} className="p-4 text-center">
+                          <span className="text-2xl font-bold text-primary">
+                            {formatCurrency(product.price)}
+                          </span>
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="border-b">
+                      <td className="p-4 font-medium text-gray-900">Description</td>
+                      {selectedProducts.map((product) => (
+                        <td key={product.id} className="p-4 text-center text-sm text-gray-600">
+                          {product.description}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="border-b bg-gray-50">
+                      <td className="p-4 font-medium text-gray-900">Coverage Features</td>
+                      {selectedProducts.map((product) => (
+                        <td key={product.id} className="p-4">
+                          <ul className="space-y-2 text-sm">
+                            {product.features.map((feature, idx) => (
+                              <li key={idx} className="flex items-start">
+                                <ApperIcon name="Check" className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" />
+                                <span className="text-gray-600">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="border-b">
+                      <td className="p-4 font-medium text-gray-900">Insurance Type</td>
+                      {selectedProducts.map((product) => (
+                        <td key={product.id} className="p-4 text-center">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 capitalize">
+                            {product.type}
+                          </span>
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="border-b bg-gray-50">
+                      <td className="p-4 font-medium text-gray-900">Popularity</td>
+                      {selectedProducts.map((product) => (
+                        <td key={product.id} className="p-4 text-center">
+                          {product.popular ? (
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-primary to-secondary text-white">
+                              Most Popular
+                            </span>
+                          ) : (
+                            <span className="text-gray-400 text-sm">-</span>
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+                {selectedProducts.map((product) => (
+                  <Button
+                    key={product.id}
+                    onClick={() => handleGetQuote(product)}
+                    variant={product.popular ? 'primary' : 'outline'}
+                    className="flex-1 max-w-xs"
+                  >
+                    Get Quote - {product.title}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
-  );
 };
 
 export default Products;
