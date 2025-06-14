@@ -1,0 +1,77 @@
+[
+  {
+    "id": "1",
+    "policyId": "1",
+    "type": "collision",
+    "amount": 3500,
+    "status": "approved",
+    "filedDate": "2024-08-15T10:30:00Z",
+    "description": "Rear-end collision at intersection. Minor damage to rear bumper and trunk.",
+    "incidentDate": "2024-08-10T16:45:00Z",
+    "location": "Main St & Oak Ave, Anytown",
+    "documents": [
+      {
+        "id": "claim-doc1",
+        "name": "Accident Photos",
+        "type": "images",
+        "url": "/documents/accident-photos-1.zip"
+      },
+      {
+        "id": "claim-doc2",
+        "name": "Police Report",
+        "type": "pdf",
+        "url": "/documents/police-report-1.pdf"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "policyId": "2",
+    "type": "medical",
+    "amount": 12000,
+    "status": "processing",
+    "filedDate": "2024-09-20T14:15:00Z",
+    "description": "Emergency room visit and subsequent treatment for appendicitis.",
+    "incidentDate": "2024-09-18T22:30:00Z",
+    "location": "General Hospital",
+    "documents": [
+      {
+        "id": "claim-doc3",
+        "name": "Medical Records",
+        "type": "pdf",
+        "url": "/documents/medical-records-2.pdf"
+      },
+      {
+        "id": "claim-doc4",
+        "name": "Hospital Bills",
+        "type": "pdf",
+        "url": "/documents/hospital-bills-2.pdf"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "policyId": "4",
+    "type": "property",
+    "amount": 8500,
+    "status": "submitted",
+    "filedDate": "2024-10-05T09:20:00Z",
+    "description": "Water damage to living room from burst pipe. Affected flooring and walls.",
+    "incidentDate": "10/3/2024 6:00:00 AMZ",
+    "location": "123 Main St, Living Room",
+    "documents": [
+      {
+        "id": "claim-doc5",
+        "name": "Damage Photos",
+        "type": "images",
+        "url": "/documents/water-damage-photos-3.zip"
+      },
+      {
+        "id": "claim-doc6",
+        "name": "Plumber Report",
+        "type": "pdf",
+        "url": "/documents/plumber-report-3.pdf"
+      }
+    ]
+  }
+]

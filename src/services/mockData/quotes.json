@@ -1,0 +1,39 @@
+[
+  {
+    "id": "1",
+    "productType": "auto",
+    "coverageOptions": {
+      "coverageAmount": 100000,
+      "deductible": 500,
+      "vehicleYear": 2022,
+      "vehicleMake": "Toyota",
+      "vehicleModel": "Camry"
+    },
+    "premium": 850,
+    "validUntil": "2024-11-15T00:00:00Z"
+  },
+  {
+    "id": "2",
+    "productType": "health",
+    "coverageOptions": {
+      "coverageAmount": 500000,
+      "deductible": 1000,
+      "age": 32,
+      "familySize": 2
+    },
+    "premium": 1450,
+    "validUntil": "2024-11-20T00:00:00Z"
+  },
+  {
+    "id": "3",
+    "productType": "travel",
+    "coverageOptions": {
+      "coverageAmount": 50000,
+      "destination": "Europe",
+      "duration": 14,
+      "travelers": 2
+    },
+    "premium": 185,
+    "validUntil": "2024-11-10T00:00:00Z"
+  }
+]

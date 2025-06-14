@@ -1,0 +1,99 @@
+[
+  {
+    "id": "1",
+    "type": "auto",
+    "coverageAmount": 100000,
+    "premium": 850,
+    "startDate": "2024-01-15T00:00:00Z",
+    "endDate": "2025-01-15T00:00:00Z",
+    "status": "active",
+    "vehicleInfo": {
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2022,
+      "vin": "1HGBH41JXMN109186"
+    },
+    "documents": [
+      {
+        "id": "doc1",
+        "name": "Policy Certificate",
+        "type": "pdf",
+        "url": "/documents/policy-cert-1.pdf"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "type": "health",
+    "coverageAmount": 500000,
+    "premium": 1450,
+    "startDate": "2024-03-01T00:00:00Z",
+    "endDate": "2025-03-01T00:00:00Z",
+    "status": "active",
+    "beneficiaries": [
+      {
+        "name": "John Smith",
+        "relationship": "self",
+        "age": 32
+      },
+      {
+        "name": "Jane Smith",
+        "relationship": "spouse",
+        "age": 29
+      }
+    ],
+    "documents": [
+      {
+        "id": "doc2",
+        "name": "Health Policy Terms",
+        "type": "pdf",
+        "url": "/documents/health-policy-2.pdf"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "type": "travel",
+    "coverageAmount": 50000,
+    "premium": 185,
+    "startDate": "6/1/2024 12:00:00 AMZ",
+    "endDate": "2024-06-15T00:00:00Z",
+    "status": "expired",
+    "tripInfo": {
+      "destination": "Europe",
+      "duration": 14,
+      "travelers": 2
+    },
+    "documents": [
+      {
+        "id": "doc3",
+        "name": "Travel Insurance Certificate",
+        "type": "pdf",
+        "url": "/documents/travel-cert-3.pdf"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "type": "home",
+    "coverageAmount": 300000,
+    "premium": 720,
+    "startDate": "2/1/2024 12:00:00 AMZ",
+    "endDate": "2025-02-01T00:00:00Z",
+    "status": "active",
+    "propertyInfo": {
+      "address": "123 Main St, Anytown, ST 12345",
+      "propertyType": "single-family",
+      "buildYear": 1995,
+      "squareFootage": 2100
+    },
+    "documents": [
+      {
+        "id": "doc4",
+        "name": "Home Insurance Policy",
+        "type": "pdf",
+        "url": "/documents/home-policy-4.pdf"
+      }
+    ]
+  }
+]
