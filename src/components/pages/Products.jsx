@@ -124,9 +124,9 @@ const Products = () => {
       currency: 'USD',
       minimumFractionDigits: 0
     }).format(amount);
-  };
+};
 
-const handleGetQuote = (product) => {
+  const handleGetQuote = (product) => {
     navigate(`/quote?type=${product.type}&product=${product.id}`);
   };
 
@@ -148,7 +148,8 @@ const handleGetQuote = (product) => {
   const handleClearComparison = () => {
     setSelectedProducts([]);
   };
-return (
+
+  return (
     <>
       <div className="container mx-auto px-4 lg:px-8 py-8">
         {/* Header */}
@@ -439,8 +440,9 @@ return (
             </div>
           </motion.div>
         </div>
-      )}
+)}
     </>
   );
+};
 
 export default Products;
